@@ -29,10 +29,11 @@ Instead of applying a generic low-pass filter and white noise, Vintage Radio run
 - **Node.js** `>= 20` (tested on `v24.14.0`) and **npm**
 - **Google Chrome** or **Chromium** (Manifest V3, Chrome `116+`)
 
-### 1. Install Dependencies & Build Production Bundle
+### 1. Clone, Install & Build Production Bundle
 
 ```bash
-cd /Users/ishanksahni/money
+git clone https://github.com/ishank000/radio-wave.git
+cd radio-wave
 npm install
 npm run build
 ```
@@ -43,7 +44,7 @@ This compiles TypeScript strictly (`tsc --noEmit`) and outputs the ready-to-load
 
 1. Open Chrome and navigate to `chrome://extensions`.
 2. Enable **Developer mode** (toggle in the top-right corner).
-3. Click **Load unpacked** and select `/Users/ishanksahni/money/dist`.
+3. Click **Load unpacked** and select the project's `dist` directory.
 4. Pin **Vintage Radio** in the Chrome toolbar.
 5. Open a media tab (e.g., YouTube, Spotify Web, SoundCloud, NPR, or any HTML5 audio/video page), start playback, click the **Vintage Radio** icon, and press **Enable Radio**!
    - _Tip:_ To audition presets immediately without opening an external site, click **Workbench ↗** in the popup footer and press **Play Reference Audio**.
