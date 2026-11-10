@@ -215,7 +215,12 @@ function updateActiveParams(params: DspRuntimeParams): void {
   }
 }
 
-chrome.runtime.onMessage.addListener((rawMessage: unknown, _sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((rawMessage: unknown, sender, sendResponse) => {
+  // Validate that messages originate exclusively from within this extension
+  if (sender.id !== chrome.runtime.id) {
+    return false;
+  }
+
   const msg = rawMessage as ExtensionMessage | undefined;
   if (!msg || typeof msg !== 'object' || !('type' in msg)) {
     return false;

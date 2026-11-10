@@ -138,7 +138,20 @@ async function handleStartCapture(
 ): Promise<SessionActionResponse> {
   await ensureInitialized();
 
-  const urlCheck = isCapturableTabUrl(msg.tabUrl);
+  // Defense-in-depth: query actual tab from Chrome to prevent URL spoofing
+  let verifiedUrl = msg.tabUrl;
+  let verifiedTitle = msg.tabTitle;
+  if (typeof chrome !== 'undefined' && chrome.tabs?.get) {
+    try {
+      const liveTab = await chrome.tabs.get(msg.tabId);
+      if (liveTab.url) verifiedUrl = liveTab.url;
+      if (liveTab.title) verifiedTitle = liveTab.title;
+    } catch {
+      // Tab may have closed or tab access failed
+    }
+  }
+
+  const urlCheck = isCapturableTabUrl(verifiedUrl);
   if (!urlCheck.capturable) {
     sessionState = {
       ...sessionState,
@@ -181,8 +194,8 @@ async function handleStartCapture(
       ...sessionState,
       status: 'capturing',
       capturedTabId: msg.tabId,
-      capturedTabTitle: msg.tabTitle || 'Active Browser Tab',
-      capturedTabUrl: msg.tabUrl,
+      capturedTabTitle: verifiedTitle || 'Active Browser Tab',
+      capturedTabUrl: verifiedUrl,
       sampleRate: response.sampleRate ?? 48000,
       engineMode: response.engineMode ?? 'audioworklet',
       errorMessage: null,
@@ -244,7 +257,12 @@ async function handleStopCapture(): Promise<SessionActionResponse> {
   return { ok: true, state: sessionState };
 }
 
-chrome.runtime.onMessage.addListener((rawMessage: unknown, _sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((rawMessage: unknown, sender, sendResponse) => {
+  // Validate that messages originate exclusively from within this extension
+  if (sender.id !== chrome.runtime.id) {
+    return false;
+  }
+
   const msg = rawMessage as ExtensionMessage | undefined;
   if (!msg || typeof msg !== 'object' || !('type' in msg)) {
     return false;
@@ -355,7 +373,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (sessionState.capturedTabId !== tabId || sessionState.status !== 'capturing') {
     return;
   }
-  if (changeInfo.url && !isCapturableTabUrl(changeInfo.url).capturable) {
+  const currentUrl = changeInfo.url || tab.url;
+  if (currentUrl && !isCapturableTabUrl(currentUrl).capturable) {
     void handleStopCapture();
     return;
   }
