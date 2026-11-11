@@ -7,9 +7,7 @@ This log records objective deliverables, test execution results, encountered iss
 ## Phase 1: Repository & Skill Inspection — COMPLETED
 
 - **Completed:**
-  - Inspected `/Users/ishanksahni` and preserved all existing files outside `/Users/ishanksahni/money`.
-  - Initialized `/Users/ishanksahni/money` as a clean Git repository (`main`).
-  - Audited local binaries (`node v24.14.0`, `npm`, `python3`, Google Chrome `156.0`, Playwright Chromium `1234`) and read instructions for relevant installed skills (`dsp`, `frontend-design`, `webapp-testing`, `taste-skill`, `emil-design-eng`, `ui-ux-pro-max`, `test-driven-development`, `database-lookup`, `citation-verification`).
+  - Audited local environment and toolchains (`node v24.14.0`, `npm`, `python3`, Google Chrome `156.0`, Playwright Chromium `1234`) and read instructions for relevant installed skills (`dsp`, `frontend-design`, `webapp-testing`, `taste-skill`, `emil-design-eng`, `ui-ux-pro-max`, `test-driven-development`, `database-lookup`, `citation-verification`).
 - **Tested:** Verified tool paths and skill instructions.
 - **Failed / Fixed:** None.
 - **Next:** Phase 2 (Historical, psychoacoustic, and competitor research + technical specification).
@@ -86,4 +84,4 @@ This log records objective deliverables, test execution results, encountered iss
 - **Completed:**
   - Authored `README.md`, `docs/ARCHITECTURE.md`, `docs/USER_GUIDE.md`, `docs/PRIVACY.md`, `docs/KNOWN_LIMITATIONS.md`, and finalized `docs/PHASE_LOG.md`.
   - Ran Prettier formatting, ESLint, TypeScript check, production build, Vitest DSP/unit suite, and Playwright real-Chrome MV3 extension E2E suite.
-  - Committed complete source tree and lockfile cleanly to Git in `/Users/ishanksahni/money`.
+  - Committed complete source tree and lockfile cleanly to Git.

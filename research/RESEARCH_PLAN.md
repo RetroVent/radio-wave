@@ -13,7 +13,7 @@ Before writing DSP or extension code, our multidisciplinary engineering and rese
 
 ## 2. Workspace & Installed Skill Audit (Phase 1 Summary)
 
-Prior to research and implementation, we audited `/Users/ishanksahni` (preserving all unrelated workspace files), initialized `/Users/ishanksahni/money` as a clean Git repository (`main`), verified local toolchains (`node v24.14.0`, `npm`, `python3`, Google Chrome desktop binary), and inspected the installed agent skills in `~/.gemini/skills/`:
+Prior to research and implementation, we audited the environment, initialized the repository cleanly on `main`, verified local toolchains (`node v24.14.0`, `npm`, `python3`, Google Chrome desktop binary), and inspected the installed agent skills in `~/.gemini/skills/`:
 
 | Skill Repository                       | Inspected Skills                                                                                           | Relevance & Application Decision                                                                                                                                                                                                                                                                |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
